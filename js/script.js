@@ -1,0 +1,1 @@
+alert('It\'s time to use git!);
