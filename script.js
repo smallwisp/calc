@@ -25,34 +25,34 @@ let arr = addExpenses.toLowerCase().split(',');
 console.log(`Возможные расходы: ${arr}`);
 
 
-function getExpensesMonth() {
-   return amount1 + amount2;
+function getExpensesMonth(expenses1, expenses2) {
+   return expenses1 + expenses2;
 }
 
-console.log(`Расходы за месяц: ${getExpensesMonth()}`);
+console.log(`Расходы за месяц: ${getExpensesMonth(amount1, amount2)}`);
 
-function getAccumulatedMonth() {
-   return money - amount1 - amount2;
+function getAccumulatedMonth(income, expenses1, expenses2) {
+   return income - expenses1 - expenses2;
 }
 
-let accumulatedMonth = getAccumulatedMonth();
+let accumulatedMonth = getAccumulatedMonth(money, amount1, amount2);
 
-function getTargetMonth() {
-   return Math.ceil(mission / accumulatedMonth);
+function getTargetMonth(target, accumulatedMonth) {
+   return Math.ceil(target / accumulatedMonth);
 }
 
-console.log(`Цель будет достигнута за ${getTargetMonth()} месяцев(-а)`);
+console.log(`Цель будет достигнута за ${getTargetMonth(mission, accumulatedMonth)} месяцев(-а)`);
 
 let budgetDay = accumulatedMonth / 30;
 
 console.log(`Дневной бюджет : ${Math.floor(budgetDay)}`);
 
-function getStatusIncome() {
-   if (budgetDay >= 1200) {
+function getStatusIncome(income) {
+   if (income >= 1200) {
       return ('У вас высокий уровень дохода');
-   } else if (budgetDay >= 600) {
+   } else if (income >= 600) {
       return ('У вас средний уровень дохода');
-   } else if (budgetDay >= 0) {
+   } else if (income >= 0) {
       return ('К сожалению, у вас уровень дохода ниже среднего(');
    } else {
       return ('Что-то пошло не так');
@@ -60,4 +60,4 @@ function getStatusIncome() {
    
 }
 
-console.log(getStatusIncome());
+console.log(getStatusIncome(budgetDay));
