@@ -12,34 +12,52 @@ let amount2 = +prompt('Во сколько это обойдется?');
 let mission = 1e6;
 let period = 10;
 
-console.log(typeof money);
-console.log(typeof income);
-console.log(typeof deposit);
-console.log(addExpenses.length);
-console.log(`Период равен ${period} месяцев.
-Цель заработать ${mission} рублей`);
+function showTypeOf(data) {
+   console.log(data, typeof(data));
+}
+
+showTypeOf(money);
+showTypeOf(income);
+showTypeOf(deposit);
 
 let arr = addExpenses.toLowerCase().split(',');
 
-console.log(arr);
+console.log(`Возможные расходы: ${arr}`);
 
 
-let budgetMonth = money - amount1 - amount2;
+function getExpensesMonth(expenses1, expenses2) {
+   return expenses1 + expenses2;
+}
 
-console.log(budgetMonth);
+console.log(`Расходы за месяц: ${getExpensesMonth(amount1, amount2)}`);
 
-console.log(`Цель будет достигнута за ${Math.ceil(mission / budgetMonth)} месяцев(-а)`);
+function getAccumulatedMonth(income, expenses1, expenses2) {
+   return income - expenses1 - expenses2;
+}
 
-let budgetDay = budgetMonth / 30;
+let accumulatedMonth = getAccumulatedMonth(money, amount1, amount2);
+
+function getTargetMonth(target, accumulatedMonth) {
+   return Math.ceil(target / accumulatedMonth);
+}
+
+console.log(`Цель будет достигнута за ${getTargetMonth(mission, accumulatedMonth)} месяцев(-а)`);
+
+let budgetDay = accumulatedMonth / 30;
 
 console.log(`Дневной бюджет : ${Math.floor(budgetDay)}`);
 
-if (budgetDay >= 1200) {
-   console.log('У вас высокий уровень дохода');
-} else if (budgetDay >= 600) {
-   console.log('У вас средний уровень дохода');
-} else if (budgetDay >= 0) {
-   console.log('К сожалению, у вас уровень дохода ниже среднего(');
-} else {
-   console.log('Что-то пошло не так');
+function getStatusIncome(income) {
+   if (income >= 1200) {
+      return ('У вас высокий уровень дохода');
+   } else if (income >= 600) {
+      return ('У вас средний уровень дохода');
+   } else if (income >= 0) {
+      return ('К сожалению, у вас уровень дохода ниже среднего(');
+   } else {
+      return ('Что-то пошло не так');
+   }
+   
 }
+
+console.log(getStatusIncome(budgetDay));
