@@ -60,13 +60,13 @@ let appData = {
          let item;
          do {
             item = prompt('Введите обязательную статью расходов:');
-         } while (isNumber(item));
+         } while ((item == '') || isNumber(item));
 
          do {
             cost = +prompt('Во сколько это обойдется?');
             appData.expenses[item] = cost;
          
-         } while (!isNumber(cost));
+         } while ((cost == '') || !isNumber(cost));
       }
       console.log(appData.expenses);
    },
