@@ -50,15 +50,7 @@ let appData = {
    deposit: false,
    pecrentDeposit: 0,
    moneyDeposit: 0,
-   checkSalaryAmount() {
-      salaryAmount.addEventListener('input', () => {
-         if (salaryAmount === '') {
-            startBtn.setAttribute('disabled', 'disabled');
-         } else {
-            startBtn.removeAttribute('disabled');
-         }
-      })
-   },
+   
    start: function () {
       appData.budget = +salaryAmount.value;
 
