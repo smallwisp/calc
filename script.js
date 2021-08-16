@@ -27,6 +27,15 @@ let isNumber = function (n) {
    return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
+salaryAmount.addEventListener('input', (event) => {
+   if (event.data === null) {
+      startBtn.setAttribute('disabled', 'disabled');
+   } else {
+      startBtn.removeAttribute('disabled');
+   }
+   console.log(event.data);
+});
+
 let appData = {
    budget: 0,
    budgetDay: 0,
@@ -41,11 +50,16 @@ let appData = {
    deposit: false,
    pecrentDeposit: 0,
    moneyDeposit: 0,
+   checkSalaryAmount() {
+      salaryAmount.addEventListener('input', () => {
+         if (salaryAmount === '') {
+            startBtn.setAttribute('disabled', 'disabled');
+         } else {
+            startBtn.removeAttribute('disabled');
+         }
+      })
+   },
    start: function () {
-      if (salaryAmount.value === '') {
-         startBtn.removeAttribute(disabled);
-      }
-      
       appData.budget = +salaryAmount.value;
 
       appData.getExpenses();
@@ -65,7 +79,7 @@ let appData = {
       additionalExpensesValue.value = appData.addExpenses.join(', ');
       additionalIncomeValue.value = appData.addIncome.join(', ');
       targetMonthValue.value = appData.getTargetMonth();
-      // periodSelect.addEventListener('input', appData.showResult);
+      periodSelect.addEventListener('input', appData.showResult);
       incomePeriodValue.value = appData.calcPeriod();
 
    },
