@@ -31,13 +31,23 @@ let isNumber = function (n) {
    return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-salaryAmount.addEventListener('input', (event) => {
+/* salaryAmount.addEventListener('input', (event) => {
    if (event.data === null) {
       startBtn.setAttribute('disabled', 'disabled');
    } else {
       startBtn.removeAttribute('disabled');
    }
    console.log(event.data);
+}); */
+startBtn.setAttribute('disabled', 'disabled');
+
+salaryAmount.addEventListener('input', () => {
+   if (salaryAmount.value === '') {
+      startBtn.setAttribute('disabled', 'disabled');
+   } else {
+      startBtn.removeAttribute('disabled');
+   }
+   console.log(headerInput.value);
 });
 
 let appData = {
@@ -67,8 +77,6 @@ let appData = {
       this.getBudget();
       this.getPeriodSelect();
       this.showResult();
-      startBtn.style.display = 'none';
-      cancelBtn.style.display = 'block';
 
       salaryAmount.setAttribute('disabled', 'disabled');
       incomeItems.forEach(item => {
@@ -84,6 +92,9 @@ let appData = {
       });
       additionalExpensesItem.setAttribute('disabled', 'disabled');
       targetAmount.setAttribute('disabled', 'disabled');
+
+      startBtn.style.display = 'none';
+      cancelBtn.style.display = 'block';
    },
    reset() {
       this.budget = 0;
