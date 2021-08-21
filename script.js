@@ -83,6 +83,8 @@ let appData = {
          item.querySelector('.income-title').setAttribute('disabled', 'disabled');
          item.querySelector('.income-amount').setAttribute('disabled', 'disabled');
       });
+      incomePlus.setAttribute('disabled', 'disabled');
+      expensesPlus.setAttribute('disabled', 'disabled');
       additionalincomeItems.forEach(item => {
          item.setAttribute('disabled', 'disabled');
       });
@@ -95,6 +97,7 @@ let appData = {
 
       startBtn.style.display = 'none';
       cancelBtn.style.display = 'block';
+      checkBox.setAttribute('disabled', 'disabled');
    },
    reset() {
       this.budget = 0;
@@ -131,6 +134,29 @@ let appData = {
       budgetDayValue.value = '';
       expensesMonthValue.value = '';
       incomePeriodValue.value = '';
+
+      startBtn.style.display = 'block';
+      startBtn.setAttribute('disabled', 'disabled');
+
+      cancelBtn.style.display = 'none';
+
+      salaryAmount.removeAttribute('disabled');
+      incomeItems.forEach(item => {
+         item.querySelector('.income-title').removeAttribute('disabled');
+         item.querySelector('.income-amount').removeAttribute('disabled');
+      });
+      incomePlus.removeAttribute('disabled');
+      expensesPlus.removeAttribute('disabled');
+      additionalincomeItems.forEach(item => {
+         item.removeAttribute('disabled');
+      });
+      expensesItems.forEach(item => {
+         item.querySelector('.expenses-title').removeAttribute('disabled');
+         item.querySelector('.expenses-amount').removeAttribute('disabled');
+      });
+      additionalExpensesItem.removeAttribute('disabled');
+      targetAmount.removeAttribute('disabled');
+      checkBox.removeAttribute('disabled');
 
    },
    showResult() {
