@@ -31,8 +31,6 @@ let isNumber = function (n) {
    return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-startBtn.setAttribute('disabled', 'disabled');
-
 const AppData = function () {
    this.budget = 0;
    this.budgetDay = 0;
@@ -56,12 +54,12 @@ AppData.prototype.checkSalaryAmount = function () {
    } else {
       startBtn.removeAttribute('disabled');
    }
-   console.log(headerInput.value);
+   // console.log(headerInput.value);
    });
 };
 
 AppData.prototype.start = function () {
-   
+   console.log('this.start:', this);
    this.budget = +salaryAmount.value;
    
    this.getExpenses();
@@ -73,8 +71,9 @@ AppData.prototype.start = function () {
    this.getBudget();
    this.getPeriodSelect();
    this.showResult();
-
+   
    salaryAmount.setAttribute('disabled', 'disabled');
+
    incomeItems.forEach(item => {
       item.querySelector('.income-title').setAttribute('disabled', 'disabled');
       item.querySelector('.income-amount').setAttribute('disabled', 'disabled');
@@ -164,7 +163,7 @@ AppData.prototype.showResult = function() {
    additionalExpensesValue.value = appData.addExpenses.join(', ');
    additionalIncomeValue.value = appData.addIncome.join(', ');
    targetMonthValue.value = appData.getTargetMonth();
-   periodSelect.addEventListener('change', () => {
+   periodSelect.addEventListener('input', () => {
       incomePeriodValue.value = this.calcPeriod();
    });
       
@@ -301,14 +300,14 @@ AppData.prototype.getStatusIncome = function() {
       }
 };
 AppData.prototype.getInfoDeposit = function() {
-      if (appData.deposit) {
+      if (this.deposit) {
          do {
-            appData.pecrentDeposit = prompt('Какой годовой процент?', '10');   
-         } while (!isNumber(appData.pecrentDeposit));
+            this.pecrentDeposit = prompt('Какой годовой процент?', '10');   
+         } while (!isNumber(this.pecrentDeposit));
 
          do {
-            appData.moneyDeposit = prompt('Какая сумма заложена?', 10000); 
-         } while (!isNumber(appData.moneyDeposit));
+            this.moneyDeposit = prompt('Какая сумма заложена?', 10000); 
+         } while (!isNumber(this.moneyDeposit));
       }
 };
 AppData.prototype.calcPeriod = function() {
@@ -318,15 +317,25 @@ AppData.prototype.getPeriodSelect = function() {
       return periodAmount.textContent = periodSelect.value;
 };
 
+AppData.prototype.eventListeners = function () {
+   console.log(this);
+   startBtn.addEventListener('click', this.start.bind(appData));
+   cancelBtn.addEventListener('click', this.reset.bind(appData));
+   expensesPlus.addEventListener('click', this.addExpensesBlock);
+   incomePlus.addEventListener('click', this.addIncomeBlock);
+   periodSelect.addEventListener('input', this.getPeriodSelect);
+   
+};
+
 const appData = new AppData();
 
 console.log(appData);
+console.log(AppData);
+appData.checkSalaryAmount();
+appData.eventListeners();
+/* appData.start();
+appData.reset(); */
 
-startBtn.addEventListener('click', appData.start.bind(appData));
-cancelBtn.addEventListener('click', appData.reset.bind(appData));
-expensesPlus.addEventListener('click', appData.addExpensesBlock);
-incomePlus.addEventListener('click', appData.addIncomeBlock);
-periodSelect.addEventListener('input', appData.getPeriodSelect);
 
 function showObject(obj) {
    console.log('Наша программа включает в себя данные:');
