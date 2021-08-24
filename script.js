@@ -333,9 +333,6 @@ console.log(appData);
 console.log(AppData);
 appData.checkSalaryAmount();
 appData.eventListeners();
-/* appData.start();
-appData.reset(); */
-
 
 function showObject(obj) {
    console.log('Наша программа включает в себя данные:');
