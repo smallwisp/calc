@@ -209,11 +209,8 @@ class AppDataClass {
    }
 
    deleteIncomeBlock() {
-<<<<<<< HEAD
       incomeItems = document.querySelectorAll('.income-items');
 
-=======
->>>>>>> c1dd77642c4cfe2db36ea68b3e8bc321d13ffe7e
       console.log(incomeItems[0].parentNode);
       
       incomeItems.forEach((item) => {
