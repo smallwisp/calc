@@ -344,9 +344,10 @@ class AppDataClass {
          depositPercent.style.display = 'inline-block';
          depositPercent.value = '';
          depositPercent.addEventListener('input', () => {
-            if (!isNumber(depositPercent.value)) {
+            if (!isNumber(depositPercent.value) || (+depositPercent.value > 100) || (+depositPercent.value < 0)) {
                alert('Введите корректное значение в поле проценты!');
                startBtn.setAttribute('disabled', 'disabled');
+               depositPercent.value = '';
             } else {
                startBtn.removeAttribute('disabled');
             }
