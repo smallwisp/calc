@@ -395,12 +395,6 @@ console.log(AppDataClass);
 appData.checkSalaryAmount();
 appData.eventListeners();
 
-/* function showObject(obj) {
-    console.log('Наша программа включает в себя данные:');
-    for (const key in obj) {
-        console.log(`${key}: ${obj[key]}`);
-    }
-} */
 
 
 
